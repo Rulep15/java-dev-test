@@ -189,8 +189,6 @@ Endpoints completos
 
 Dockerfile listo
 
-README profesional
-
 💬 10. Autor
 
 Proyecto desarrollado como parte del Java Dev Test — 2025
