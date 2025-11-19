@@ -177,19 +177,6 @@ Se utilizó RestTemplate por simplicidad y compatibilidad.
 
 Arquitectura por capas para mejorar legibilidad y mantenibilidad.
 
-✔ 9. Estado del proyecto
-
-API funcional
-
-Integración con API externa
-
-Base H2 configurada
-
-Endpoints completos
-
-Dockerfile listo
-
 💬 10. Autor
 
-Proyecto desarrollado como parte del Java Dev Test — 2025
-Lucas
+Proyecto desarrollado como parte del Java Dev Test — 2025 Lucas
