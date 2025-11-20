@@ -126,7 +126,7 @@ Lógica:
 
 Llama al servicio externo.
 
-Extrae id y name..
+Extrae id y name.
 
 Guarda en H2.
 
