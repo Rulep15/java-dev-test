@@ -158,14 +158,53 @@ Ejemplo (REMOTE):
 "source": "REMOTE"
 }
 
-Ejemplo (Error):
+⚠ 8. Manejo de errores (API externa)
 
+Error 400 — Bad Request
+🔹 Significado
+
+El ID enviado no es válido según la API externa.
+
+🔹 Respuesta interna
+{
+"status": 400,
+"message": "Invalid ID"
+}
+
+Error 404 — Not Found
+🔹 Significado
+
+El objeto no existe en la API externa.
+
+🔹 Respuesta interna
+{
+"status": 404,
+"message": "Object not found"
+}
+
+Error 500+ — Server Error
+🔹 Significado
+
+La API externa falló o no pudo procesar la solicitud.
+
+🔹 Respuesta interna
 {
 "status": 500,
 "message": "Error requesting external API"
 }
 
-📝 8. Decisiones de diseño
+Timeout / Error de conexión
+🔹 Significado
+
+La API externa no responde o no está disponible.
+
+🔹 Respuesta interna
+{
+"status": 503,
+"message": "External service unavailable"
+}
+
+📝 9. Decisiones de diseño
 
 El GET no guarda en la base, siguiendo simplicidad y coherencia con la especificación.
 
