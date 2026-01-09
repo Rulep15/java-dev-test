@@ -30,32 +30,39 @@ public class ObjectService {
         this.repository = repository;
     }
 
-    public ObjectResponseDto saveObject(String id) throws Exception {
-        String json = externalClient.getExternalObject(id);
 
-        JsonNode node = mapper.readTree(json);
-        String name = node.has("name") ? node.get("name").asText() : null;
+    //Este metodo es el que se utiliza al realizar un POST
+    public ObjectResponseDto saveObject(String id) throws Exception {
+        String json = externalClient.getExternalObject(id); //Este llama a la api externa que esta en mi client
+
+        JsonNode node = mapper.readTree(json); //Convertir el texto a un objeto 
+        String name = node.has("name") ? node.get("name").asText() : null; //Del json extrae el campo name
 
         ObjectEntity entity = new ObjectEntity(id, name, json);
-        repository.save(entity);
+        repository.save(entity); //guarda en la base datos local H2
 
-        return new ObjectResponseDto(id, name, "LOCAL");
+        return new ObjectResponseDto(id, name, "LOCAL");  //Aca devuelve siempre el Source en LOCAL
     }
 
+
+ //Este metodo es el que se utiliza al realizar un GET
     public ObjectResponseDto getObject(String id) {
 
     return repository.findById(id)
-            .map(e -> new ObjectResponseDto(e.getId(), e.getName(), "LOCAL"))
-            .orElseGet(() -> {
+            .map(e -> new ObjectResponseDto(e.getId(), e.getName(), "LOCAL")) //En el caso de que exista en mi base lo que hace es mandar como LOCAL
+            .orElseGet(() -> { //LANDA
 
                 try {
                     // Llamar a la API externa
                     String json = externalClient.getExternalObject(id);
+                    
+                    //Lee el Json
                     JsonNode node = mapper.readTree(json);
 
-                    // Si el JSON no tiene "name", devolver null
+                    // Extrae del JSON el name
                     String name = node.has("name") ? node.get("name").asText() : null;
 
+                    //Devuelve el DTO con source "REMOTE"
                     return new ObjectResponseDto(id, name, "REMOTE");
 
                 } catch (HttpClientErrorException.NotFound e) {
