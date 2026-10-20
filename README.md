@@ -5,7 +5,7 @@ La API permite obtener datos desde la base local (H2) o, si no existen, recupera
 
 🚀 1. Tecnologías utilizadas
 
-Java 17
+Java 18
 
 Spring Boot 3.5.7
 
